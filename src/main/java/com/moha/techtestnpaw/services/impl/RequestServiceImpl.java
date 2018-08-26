@@ -1,6 +1,6 @@
 package com.moha.techtestnpaw.services.impl;
 
-import com.moha.techtestnpaw.domain.Request;
+import com.moha.techtestnpaw.domain.request.Request;
 import com.moha.techtestnpaw.repository.RequestRepository;
 import com.moha.techtestnpaw.services.RequestService;
 import org.springframework.cache.annotation.CacheConfig;

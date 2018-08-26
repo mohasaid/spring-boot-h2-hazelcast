@@ -1,6 +1,6 @@
 package com.moha.techtestnpaw.services;
 
-import com.moha.techtestnpaw.domain.Request;
+import com.moha.techtestnpaw.domain.request.Request;
 
 import java.util.List;
 

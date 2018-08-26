@@ -2,9 +2,11 @@ package com.moha.techtestnpaw.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class Host implements Serializable {
 
     private static final long serialVersionUID = 847321702951316123L;

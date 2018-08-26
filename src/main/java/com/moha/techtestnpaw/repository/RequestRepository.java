@@ -1,6 +1,6 @@
 package com.moha.techtestnpaw.repository;
 
-import com.moha.techtestnpaw.domain.Request;
+import com.moha.techtestnpaw.domain.request.Request;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

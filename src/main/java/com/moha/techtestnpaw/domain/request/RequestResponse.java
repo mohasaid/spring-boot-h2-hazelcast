@@ -1,4 +1,4 @@
-package com.moha.techtestnpaw.domain;
+package com.moha.techtestnpaw.domain.request;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

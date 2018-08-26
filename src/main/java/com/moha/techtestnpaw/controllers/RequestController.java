@@ -2,8 +2,8 @@ package com.moha.techtestnpaw.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moha.techtestnpaw.domain.Host;
-import com.moha.techtestnpaw.domain.Request;
-import com.moha.techtestnpaw.domain.RequestBuilder;
+import com.moha.techtestnpaw.domain.request.Request;
+import com.moha.techtestnpaw.domain.request.RequestBuilder;
 import com.moha.techtestnpaw.services.RequestService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

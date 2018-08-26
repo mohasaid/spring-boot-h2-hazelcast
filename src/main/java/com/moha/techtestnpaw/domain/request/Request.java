@@ -1,22 +1,28 @@
-package com.moha.techtestnpaw.domain;
+package com.moha.techtestnpaw.domain.request;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.moha.techtestnpaw.domain.Host;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="request")
+@Table(name = "request")
+@IdClass(RequestId.class)
 public class Request implements Serializable {
 
     private static final long serialVersionUID = -3872293878329119057L;
 
+    @Id
     private String accountCode;
+    @Id
     private String targetDevice;
+    @Id
     private String pluginVersion;
     private Integer pingTime;
+    @ElementCollection(targetClass = Request.class)
     private List<Host> hosts = new ArrayList<>();
 
     public String getAccountCode() {
