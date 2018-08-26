@@ -1,0 +1,10 @@
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+/mvnw
+/mvnw.cmd
+/tech_test_NPAW_redis/
+/.mvn/
