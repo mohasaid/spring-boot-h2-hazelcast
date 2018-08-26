@@ -1,33 +1,39 @@
 package com.moha.techtestnpaw.services.impl;
 
 import com.moha.techtestnpaw.domain.Request;
-import com.moha.techtestnpaw.repositories.RequestRepository;
+import com.moha.techtestnpaw.repository.RequestRepository;
 import com.moha.techtestnpaw.services.RequestService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.moha.techtestnpaw.config.HazelcastConfig.HAZELCAST_REQUEST_CONFIG;
+
 @Service
+@CacheConfig(cacheNames = HAZELCAST_REQUEST_CONFIG)
 public class RequestServiceImpl implements RequestService {
 
-    private RequestRepository requestRepository;
+    private final RequestRepository requestRepository;
 
-    @Autowired
     public RequestServiceImpl(RequestRepository requestRepository) {
         this.requestRepository = requestRepository;
     }
 
     @Override
-    @Cacheable("findRequests")
-    public List<Request> findRequest(String accountCode) {
+    @Cacheable
+    public List<Request> findByAccountCode(final String accountCode) {
         return requestRepository.findByAccountCode(accountCode);
     }
 
     @Override
-    public void save(Request request) {
-        requestRepository.save(request);
+    public Request save(final Request request) {
+        return requestRepository.save(request);
     }
 
+    @Override
+    public void delete(String accountCode, String targetDevice, String pluginVersion) {
+        requestRepository.deleteByAccountCodeAndTargetDeviceAndPluginVersion(accountCode, targetDevice, pluginVersion);
+    }
 }

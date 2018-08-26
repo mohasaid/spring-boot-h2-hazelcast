@@ -1,25 +1,29 @@
 package com.moha.techtestnpaw.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.moha.techtestnpaw.domain.Host;
 import com.moha.techtestnpaw.domain.Request;
+import com.moha.techtestnpaw.domain.RequestBuilder;
 import com.moha.techtestnpaw.services.RequestService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
 public class RequestController {
 
-    private RequestService requestService;
+    private final RequestService requestService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public RequestController(RequestService requestService) {
         this.requestService = requestService;
     }
+
 
     @GetMapping(value = "/getData", produces = MediaType.APPLICATION_XML_VALUE)
     @ResponseBody
@@ -27,7 +31,7 @@ public class RequestController {
                                   @RequestParam(value = "targetDevice") String targetDevice,
                                   @RequestParam(value = "pluginVersion") String pluginVersion) {
 
-        List<Request> requestList = requestService.findRequest(accountCode);
+        List<Request> requestList = requestService.findByAccountCode(accountCode);
 
         if (requestList.isEmpty()) {
             return ResponseEntity.ok().body("Ok");
@@ -46,5 +50,32 @@ public class RequestController {
                 .ok()
                 .headers(responseHeaders)
                 .build();
+    }
+
+    @PostMapping(value = "/addData")
+    public void addData(@RequestParam(value = "accountCode") String accountCode,
+                        @RequestParam(value = "targetDevice") String targetDevice,
+                        @RequestParam(value = "pluginVersion") String pluginVersion,
+                        @RequestParam(value = "pingTime") String pingTime,
+                        @RequestParam(value = "hosts") String hosts) throws IOException {
+
+        List<Host> hostList = Arrays.asList(objectMapper.readValue(hosts, Host[].class));
+
+        final Request request = RequestBuilder.aRequest()
+                .withAccountCode(accountCode)
+                .withTargetDevice(targetDevice)
+                .withPluginVersion(pluginVersion)
+                .withPingTime(Integer.valueOf(pingTime))
+                .withHosts(hostList)
+                .build();
+
+        requestService.save(request);
+    }
+
+    @PostMapping(value = "/deleteData")
+    public void deleteData(@RequestParam(value = "accountCode") String accountCode,
+                           @RequestParam(value = "targetDevice") String targetDevice,
+                           @RequestParam(value = "pluginVersion") String pluginVersion) {
+        requestService.delete(accountCode, targetDevice, pluginVersion);
     }
 }

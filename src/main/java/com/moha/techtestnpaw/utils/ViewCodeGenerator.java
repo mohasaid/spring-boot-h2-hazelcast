@@ -2,7 +2,7 @@ package com.moha.techtestnpaw.utils;
 
 import java.util.UUID;
 
-public class ViewCodeGenerator {
+public final class ViewCodeGenerator {
 
     private ViewCodeGenerator() {
         throw new AssertionError("Ensuring noninstaintability");

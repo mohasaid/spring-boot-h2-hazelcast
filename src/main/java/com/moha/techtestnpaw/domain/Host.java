@@ -1,5 +1,7 @@
 package com.moha.techtestnpaw.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,8 +9,10 @@ public class Host implements Serializable {
 
     private static final long serialVersionUID = 847321702951316123L;
 
+    @JsonProperty("name")
     private String name;
-    private String percentageLoad;
+    @JsonProperty("load")
+    private Integer percentageLoad;
 
     public String getName() {
         return name;
@@ -18,11 +22,11 @@ public class Host implements Serializable {
         this.name = name;
     }
 
-    public String getPercentageLoad() {
+    public Integer getPercentageLoad() {
         return percentageLoad;
     }
 
-    public void setPercentageLoad(String percentageLoad) {
+    public void setPercentageLoad(Integer percentageLoad) {
         this.percentageLoad = percentageLoad;
     }
 

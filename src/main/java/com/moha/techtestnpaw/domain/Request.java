@@ -1,23 +1,20 @@
 package com.moha.techtestnpaw.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
-
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@RedisHash("requests")
+@Entity
+@Table(name="request")
 public class Request implements Serializable {
 
     private static final long serialVersionUID = -3872293878329119057L;
 
-    @Id
     private String accountCode;
-    @Id
     private String targetDevice;
-    @Id
     private String pluginVersion;
     private Integer pingTime;
     private List<Host> hosts = new ArrayList<>();

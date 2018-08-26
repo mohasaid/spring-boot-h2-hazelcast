@@ -3,6 +3,7 @@ package com.moha.techtestnpaw.domain;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Objects;
 
 @XmlRootElement(name = "q")
 public class RequestResponse implements Serializable {
@@ -44,5 +45,20 @@ public class RequestResponse implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RequestResponse that = (RequestResponse) o;
+        return Objects.equals(host, that.host) &&
+                Objects.equals(pingTime, that.pingTime) &&
+                Objects.equals(code, that.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(host, pingTime, code);
     }
 }

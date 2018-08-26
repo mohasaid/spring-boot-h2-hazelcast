@@ -6,8 +6,11 @@ import java.util.List;
 
 public interface RequestService {
 
-    List<Request> findRequest(String accountCode);
+    List<Request> findByAccountCode(final String accountCode);
 
-    void save(Request request);
+    Request save(final Request request);
 
+    void delete(final String accountCode,
+               final String targetDevice,
+               final String pluginVersion);
 }
