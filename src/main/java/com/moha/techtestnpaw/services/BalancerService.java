@@ -52,11 +52,7 @@ public class BalancerService {
 
         // Add percentageLoad to percentageAccum for all hosts
         request.getHosts().forEach(
-                (Host host) -> {
-                    Integer accum = host.getPercentageAccum();
-                    Integer load = host.getPercentageLoad();
-                    host.setPercentageAccum(accum + load);
-                }
+                host -> host.setPercentageAccum(host.getPercentageAccum() + host.getPercentageLoad())
         );
 
         return requestResponseWriter.getResponse(requestResponse);
