@@ -14,6 +14,9 @@ public class RequestResponse implements Serializable {
     private Integer pingTime;
     private String code;
 
+    public RequestResponse() {
+    }
+
     public RequestResponse(String host, Integer pingTime, String code) {
         this.host = host;
         this.pingTime = pingTime;

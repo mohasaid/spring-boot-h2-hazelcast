@@ -5,13 +5,18 @@ import com.moha.techtestnpaw.domain.Host;
 import com.moha.techtestnpaw.domain.request.Request;
 import com.moha.techtestnpaw.domain.request.RequestBuilder;
 import com.moha.techtestnpaw.domain.request.RequestId;
+import com.moha.techtestnpaw.domain.request.RequestResponse;
 import com.moha.techtestnpaw.services.RequestService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +36,7 @@ public class RequestController {
     @ResponseBody
     public ResponseEntity getData(@RequestParam(value = "accountCode") String accountCode,
                                   @RequestParam(value = "targetDevice") String targetDevice,
-                                  @RequestParam(value = "pluginVersion") String pluginVersion) {
+                                  @RequestParam(value = "pluginVersion") String pluginVersion) throws JAXBException {
 
         RequestId requestId = new RequestId(accountCode, targetDevice, pluginVersion);
         Optional<Request> request = requestService.findById(requestId);
@@ -45,6 +50,14 @@ public class RequestController {
                 + "targetDevice = " + targetDevice + "\n"
                 + "pluginVersion = " + pluginVersion + "\n";
 
+        JAXBContext jc = JAXBContext.newInstance(RequestResponse.class);
+        Marshaller marshaller = jc.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+        // REMOVE STANDALONE = YES DEL XML
+        RequestResponse requestResponse = new RequestResponse("test", 10, "code");
+        StringWriter sw = new StringWriter();
+        marshaller.marshal(requestResponse, sw);
+
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_XML_VALUE);
         responseHeaders.set("MyResponseHeader", message);
@@ -52,7 +65,7 @@ public class RequestController {
         return ResponseEntity
                 .ok()
                 .headers(responseHeaders)
-                .build();
+                .body(sw.toString());
     }
 
     @PostMapping(value = "/addData")
