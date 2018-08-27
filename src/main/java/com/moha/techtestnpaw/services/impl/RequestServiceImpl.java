@@ -5,6 +5,7 @@ import com.moha.techtestnpaw.domain.request.RequestId;
 import com.moha.techtestnpaw.repository.RequestRepository;
 import com.moha.techtestnpaw.services.RequestService;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +29,13 @@ public class RequestServiceImpl implements RequestService {
         return requestRepository.findById(requestId);
     }
 
+    @CacheEvict
     @Override
     public Request save(final Request request) {
         return requestRepository.save(request);
     }
 
+    @CacheEvict
     @Override
     public void deleteById(final RequestId requestId) {
         requestRepository.deleteById(requestId);

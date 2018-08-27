@@ -1,6 +1,6 @@
 package com.moha.techtestnpaw.domain.request;
 
-import com.moha.techtestnpaw.domain.Host;
+import com.moha.techtestnpaw.domain.host.Host;
 
 import java.util.List;
 

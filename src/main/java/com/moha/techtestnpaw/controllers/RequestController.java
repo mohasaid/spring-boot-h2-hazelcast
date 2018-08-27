@@ -1,22 +1,19 @@
 package com.moha.techtestnpaw.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moha.techtestnpaw.domain.Host;
+import com.moha.techtestnpaw.domain.host.Host;
 import com.moha.techtestnpaw.domain.request.Request;
 import com.moha.techtestnpaw.domain.request.RequestBuilder;
 import com.moha.techtestnpaw.domain.request.RequestId;
-import com.moha.techtestnpaw.domain.request.RequestResponse;
+import com.moha.techtestnpaw.services.BalancerService;
 import com.moha.techtestnpaw.services.RequestService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -25,13 +22,14 @@ import java.util.Optional;
 public class RequestController {
 
     private final RequestService requestService;
+    private final BalancerService balancerService;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public RequestController(RequestService requestService) {
+    public RequestController(RequestService requestService, BalancerService balancerService) {
         this.requestService = requestService;
+        this.balancerService = balancerService;
     }
-
-
+    
     @GetMapping(value = "/getData", produces = MediaType.APPLICATION_XML_VALUE)
     @ResponseBody
     public ResponseEntity getData(@RequestParam(value = "accountCode") String accountCode,
@@ -41,31 +39,23 @@ public class RequestController {
         RequestId requestId = new RequestId(accountCode, targetDevice, pluginVersion);
         Optional<Request> request = requestService.findById(requestId);
 
-        if (!request.isPresent()) {
-            return ResponseEntity.ok().body("Ok");
-        }
-
         String message = "GetData GET request!\n"
                 + "accountCode = " + accountCode + "\n"
                 + "targetDevice = " + targetDevice + "\n"
                 + "pluginVersion = " + pluginVersion + "\n";
 
-        JAXBContext jc = JAXBContext.newInstance(RequestResponse.class);
-        Marshaller marshaller = jc.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-        // REMOVE STANDALONE = YES DEL XML
-        RequestResponse requestResponse = new RequestResponse("test", 10, "code");
-        StringWriter sw = new StringWriter();
-        marshaller.marshal(requestResponse, sw);
-
-        HttpHeaders responseHeaders = new HttpHeaders();
+        final HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_XML_VALUE);
         responseHeaders.set("MyResponseHeader", message);
 
-        return ResponseEntity
-                .ok()
-                .headers(responseHeaders)
-                .body(sw.toString());
+        if (!request.isPresent()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity
+                    .ok()
+                    .headers(responseHeaders)
+                    .body(balancerService.balanceRequest(request.get()));
+        }
     }
 
     @PostMapping(value = "/addData")

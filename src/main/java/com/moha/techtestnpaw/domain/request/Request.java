@@ -1,7 +1,7 @@
 package com.moha.techtestnpaw.domain.request;
 
-import com.moha.techtestnpaw.domain.Host;
-import com.moha.techtestnpaw.domain.HostListConverter;
+import com.moha.techtestnpaw.domain.host.Host;
+import com.moha.techtestnpaw.domain.host.HostListConverter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -65,6 +65,10 @@ public class Request implements Serializable {
 
     public void setHosts(List<Host> hosts) {
         this.hosts = hosts;
+    }
+
+    public RequestId getId() {
+        return new RequestId(accountCode, targetDevice, pluginVersion);
     }
 
     @Override

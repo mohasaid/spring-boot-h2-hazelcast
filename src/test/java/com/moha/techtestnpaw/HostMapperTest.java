@@ -1,7 +1,7 @@
 package com.moha.techtestnpaw;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moha.techtestnpaw.domain.Host;
+import com.moha.techtestnpaw.domain.host.Host;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

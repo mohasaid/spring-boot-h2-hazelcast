@@ -1,11 +1,13 @@
-package com.moha.techtestnpaw.domain.request;
+package com.moha.techtestnpaw.domain.requestresponse;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 import java.util.Objects;
 
 @XmlRootElement(name = "q")
+@XmlType(propOrder={"host", "pingTime", "code"})
 public class RequestResponse implements Serializable {
 
     private static final long serialVersionUID = -2165348254717812579L;
