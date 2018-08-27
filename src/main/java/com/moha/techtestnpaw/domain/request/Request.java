@@ -1,6 +1,7 @@
 package com.moha.techtestnpaw.domain.request;
 
 import com.moha.techtestnpaw.domain.Host;
+import com.moha.techtestnpaw.domain.HostListConverter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,7 +23,8 @@ public class Request implements Serializable {
     @Id
     private String pluginVersion;
     private Integer pingTime;
-    @ElementCollection(targetClass = Request.class)
+    @Column
+    @Convert(converter = HostListConverter.class)
     private List<Host> hosts = new ArrayList<>();
 
     public String getAccountCode() {

@@ -17,10 +17,12 @@ import static org.junit.Assert.assertTrue;
 
 public class HostMapperTest {
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Test
     public void hostMappedCorrectlyWithoutHost() throws IOException {
         JSONArray jsonArray = new JSONArray();
-        List<Host> hostList = Arrays.asList(new ObjectMapper().readValue(jsonArray.toString(), Host[].class));
+        List<Host> hostList = Arrays.asList(objectMapper.readValue(jsonArray.toString(), Host[].class));
         assertEquals(0, hostList.size(), 0);
     }
 
@@ -31,7 +33,7 @@ public class HostMapperTest {
         jsonObject.put("name", "hmoha");
         jsonObject.put("load", "10");
         jsonArray.put(jsonObject);
-        List<Host> hostList = Arrays.asList(new ObjectMapper().readValue(jsonArray.toString(), Host[].class));
+        List<Host> hostList = Arrays.asList(objectMapper.readValue(jsonArray.toString(), Host[].class));
         assertEquals(1, hostList.size(), 0);
         assertTrue(hostList.stream().allMatch(Objects::nonNull));
     }
@@ -47,7 +49,7 @@ public class HostMapperTest {
         jsonObject1.put("load", "101");
         jsonArray.put(jsonObject);
         jsonArray.put(jsonObject1);
-        List<Host> hostList = Arrays.asList(new ObjectMapper().readValue(jsonArray.toString(), Host[].class));
+        List<Host> hostList = Arrays.asList(objectMapper.readValue(jsonArray.toString(), Host[].class));
         assertEquals(2, hostList.size(), 0);
         assertTrue(hostList.stream().allMatch(Objects::nonNull));
     }
@@ -55,7 +57,7 @@ public class HostMapperTest {
     @Test
     public void hostMappedCorrectlyEndPoint() throws JSONException, IOException {
         String hosts = "[{\"name\":\"h-moha\",\"load\":10},{\"name\":\"h-moha1\",\"load\":101}]";
-        List<Host> hostList = Arrays.asList(new ObjectMapper().readValue(hosts, Host[].class));
+        List<Host> hostList = Arrays.asList(objectMapper.readValue(hosts, Host[].class));
         assertEquals(2, hostList.size(), 0);
         assertTrue(hostList.stream().allMatch(Objects::nonNull));
     }
@@ -63,8 +65,18 @@ public class HostMapperTest {
     @Test
     public void hostMappedCorrectlyEndPointOneHost() throws JSONException, IOException {
         String hosts = "[{\"name\":\"h-moha\",\"load\":10}]";
-        List<Host> hostList = Arrays.asList(new ObjectMapper().readValue(hosts, Host[].class));
+        List<Host> hostList = Arrays.asList(objectMapper.readValue(hosts, Host[].class));
         assertEquals(1, hostList.size(), 0);
+        assertTrue(hostList.stream().allMatch(Objects::nonNull));
+    }
+
+    @Test
+    public void hostMappedCorrectlyWriteValue() throws JSONException, IOException {
+        String hosts = "[{\"name\":\"h-moha\",\"load\":10},{\"name\":\"h-moha1\",\"load\":101}]";
+        List<Host> hostList = Arrays.asList(objectMapper.readValue(hosts, Host[].class));
+        assertEquals(2, hostList.size(), 0);
+        String test = objectMapper.writeValueAsString(hostList);
+        assertEquals(hosts, test);
         assertTrue(hostList.stream().allMatch(Objects::nonNull));
     }
 

@@ -1,17 +1,16 @@
 package com.moha.techtestnpaw.repository;
 
 import com.moha.techtestnpaw.domain.request.Request;
+import com.moha.techtestnpaw.domain.request.RequestId;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface RequestRepository extends CrudRepository<Request, String> {
+public interface RequestRepository extends CrudRepository<Request, RequestId> {
 
-    List<Request> findByAccountCode(final String accountCode);
+    Optional<Request> findById(final RequestId requestId);
 
     Request save(final Request request);
 
-    void deleteByAccountCodeAndTargetDeviceAndPluginVersion(final String accountCode,
-                                                            final String targetDevice,
-                                                            final String pluginVersion);
+    void deleteById(final RequestId requestId);
 }

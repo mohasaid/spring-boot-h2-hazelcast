@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moha.techtestnpaw.domain.Host;
 import com.moha.techtestnpaw.domain.request.Request;
 import com.moha.techtestnpaw.domain.request.RequestBuilder;
+import com.moha.techtestnpaw.domain.request.RequestId;
 import com.moha.techtestnpaw.services.RequestService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class RequestController {
@@ -31,9 +33,10 @@ public class RequestController {
                                   @RequestParam(value = "targetDevice") String targetDevice,
                                   @RequestParam(value = "pluginVersion") String pluginVersion) {
 
-        List<Request> requestList = requestService.findByAccountCode(accountCode);
+        RequestId requestId = new RequestId(accountCode, targetDevice, pluginVersion);
+        Optional<Request> request = requestService.findById(requestId);
 
-        if (requestList.isEmpty()) {
+        if (!request.isPresent()) {
             return ResponseEntity.ok().body("Ok");
         }
 
@@ -60,7 +63,6 @@ public class RequestController {
                         @RequestParam(value = "hosts") String hosts) throws IOException {
 
         List<Host> hostList = Arrays.asList(objectMapper.readValue(hosts, Host[].class));
-
         final Request request = RequestBuilder.aRequest()
                 .withAccountCode(accountCode)
                 .withTargetDevice(targetDevice)
@@ -76,6 +78,7 @@ public class RequestController {
     public void deleteData(@RequestParam(value = "accountCode") String accountCode,
                            @RequestParam(value = "targetDevice") String targetDevice,
                            @RequestParam(value = "pluginVersion") String pluginVersion) {
-        requestService.delete(accountCode, targetDevice, pluginVersion);
+        RequestId requestId = new RequestId(accountCode, targetDevice, pluginVersion);
+        requestService.deleteById(requestId);
     }
 }

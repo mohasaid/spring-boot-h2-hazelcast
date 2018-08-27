@@ -1,16 +1,15 @@
 package com.moha.techtestnpaw.services;
 
 import com.moha.techtestnpaw.domain.request.Request;
+import com.moha.techtestnpaw.domain.request.RequestId;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface RequestService {
 
-    List<Request> findByAccountCode(final String accountCode);
+    Optional<Request> findById(final RequestId requestId);
 
     Request save(final Request request);
 
-    void delete(final String accountCode,
-               final String targetDevice,
-               final String pluginVersion);
+    void deleteById(final RequestId requestId);
 }
