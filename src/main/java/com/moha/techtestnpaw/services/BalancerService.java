@@ -37,8 +37,6 @@ public class BalancerService {
             request = optionalRequest.get();
         }
 
-        // Initialize percentageAccum To Load
-        request.getHosts().forEach(host -> host.setPercentageAccum(host.getPercentageLoad()));
         // Get maximum percentageLoad
         Optional<Host> optionalHost = request.getHosts().stream().max(Comparator.comparingInt(Host::getPercentageLoad));
         RequestResponse requestResponse = null;
