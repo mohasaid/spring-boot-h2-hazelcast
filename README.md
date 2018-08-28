@@ -8,7 +8,7 @@ This project is the tech test for **Nice People At Work (NPAW)**.
 
 ### Build
 
-To build the project yourself you need run: 
+To build the project yourself you need to run: 
 
 ```
 $ mvn package
