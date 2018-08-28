@@ -19,7 +19,7 @@ public class HazelcastConfig {
                 .setInstanceName(HAZELCAST_INSTANCE_NAME)
                 .addMapConfig(
                         new MapConfig()
-                                .setName("findRequests")
+                                .setName(HAZELCAST_REQUEST_CONFIG)
                                 .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
                                 .setEvictionPolicy(EvictionPolicy.LRU)
                                 .setTimeToLiveSeconds(20));
