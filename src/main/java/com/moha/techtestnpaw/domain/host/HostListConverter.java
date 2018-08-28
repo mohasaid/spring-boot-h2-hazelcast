@@ -27,10 +27,9 @@ public class HostListConverter implements AttributeConverter<List<Host>, String>
     @Override
     public List<Host> convertToEntityAttribute(String hosts) {
         try {
-            // TODO Fix read values
-            List<Host> hostList = Arrays.asList(objectMapper.readValue(hosts, Host[].class));
+            List<Host> hostList = new ArrayList<>(Arrays.asList(objectMapper.readValue(hosts, Host[].class)));
             hostList.forEach(
-                    host -> host.setPercentageAccum(host.getPercentageAccum())
+                    host -> host.setPercentageAccum(host.getPercentageLoad())
             );
             return hostList;
         } catch (IOException e) {
