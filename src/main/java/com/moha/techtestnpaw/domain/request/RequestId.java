@@ -5,9 +5,14 @@ import java.util.Objects;
 
 public class RequestId implements Serializable {
 
+    private static final long serialVersionUID = 1095922479976975297L;
+
     private String accountCode;
     private String targetDevice;
     private String pluginVersion;
+
+    public RequestId() {
+    }
 
     public RequestId(String accountCode, String targetDevice, String pluginVersion) {
         this.accountCode = accountCode;
