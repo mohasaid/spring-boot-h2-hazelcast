@@ -58,4 +58,5 @@ Deletes an entity from the database
 Example: http://localhost:8080/deleteData?accountCode=XXX&targetDevice=YYY&pluginVersion=ZZZ
 ```
 
-You can modify the database data by the endpoints or just querying the embedded database which is running on *http://localhost:8080/h2-console/* with the credentials set at applications.properties file.
+Database is initialized with predefined data that can be found at resources files, but you can modify it when the server is running up by the endpoints or just querying the embedded database which is 
+running on *http://localhost:8080/h2-console/* with the credentials set at applications.properties file.
