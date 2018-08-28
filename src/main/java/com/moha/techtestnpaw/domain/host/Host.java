@@ -1,5 +1,6 @@
 package com.moha.techtestnpaw.domain.host;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Transient;
@@ -15,6 +16,7 @@ public class Host implements Serializable {
     @JsonProperty("load")
     private Integer percentageLoad;
     @Transient
+    @JsonIgnore
     private Integer percentageAccum;
 
     public String getName() {

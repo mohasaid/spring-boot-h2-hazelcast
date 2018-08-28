@@ -38,8 +38,7 @@ public class RequestController {
                                   @RequestParam(value = "targetDevice") String targetDevice,
                                   @RequestParam(value = "pluginVersion") String pluginVersion) throws JAXBException {
 
-        RequestId requestId = new RequestId(accountCode, targetDevice, pluginVersion);
-        Optional<Request> request = requestService.findById(requestId);
+        Optional<Request> request = requestService.findById(new RequestId(accountCode, targetDevice, pluginVersion));
 
         final HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_XML_VALUE);
@@ -77,7 +76,6 @@ public class RequestController {
     public void deleteData(@RequestParam(value = "accountCode") String accountCode,
                            @RequestParam(value = "targetDevice") String targetDevice,
                            @RequestParam(value = "pluginVersion") String pluginVersion) {
-        RequestId requestId = new RequestId(accountCode, targetDevice, pluginVersion);
-        requestService.deleteById(requestId);
+        requestService.deleteById(new RequestId(accountCode, targetDevice, pluginVersion));
     }
 }
