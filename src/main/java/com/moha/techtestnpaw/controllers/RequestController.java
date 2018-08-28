@@ -7,6 +7,7 @@ import com.moha.techtestnpaw.domain.request.RequestBuilder;
 import com.moha.techtestnpaw.domain.request.RequestId;
 import com.moha.techtestnpaw.services.BalancerService;
 import com.moha.techtestnpaw.services.RequestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ public class RequestController {
     private final BalancerService balancerService;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    @Autowired
     public RequestController(RequestService requestService, BalancerService balancerService) {
         this.requestService = requestService;
         this.balancerService = balancerService;
@@ -45,10 +47,12 @@ public class RequestController {
         if (!request.isPresent()) {
             return ResponseEntity.noContent().build();
         } else {
+            String body = balancerService.balanceRequest(request.get());
+            System.out.println(body);
             return ResponseEntity
                     .ok()
                     .headers(responseHeaders)
-                    .body(balancerService.balanceRequest(request.get()));
+                    .body(body);
         }
     }
 

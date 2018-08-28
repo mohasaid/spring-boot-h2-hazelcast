@@ -37,12 +37,12 @@ public class BalancerService {
         }
 
         Optional<Host> optionalHost = request.getHosts().stream().max(Comparator.comparingInt(Host::getPercentageAccum));
-        
+
         RequestResponse requestResponse = null;
         if (optionalHost.isPresent()) {
             Host host = optionalHost.get();
             requestResponse = new RequestResponse(host.getName(), request.getPingTime(), ViewCodeGenerator.getViewCode());
-            Integer percentageAccum = 100 - host.getPercentageAccum();
+            Integer percentageAccum = Math.abs(100 - host.getPercentageAccum());
             host.setPercentageAccum(percentageAccum);
         }
 
