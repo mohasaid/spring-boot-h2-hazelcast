@@ -56,12 +56,11 @@ public class RequestServiceImplTest {
                 .withPingTime(10)
                 .build();
 
+        // when
         requestRepository.save(request);
 
-        // when
-        Optional<Request> found = requestRepository.findById(request.getId());
-
         // then
+        Optional<Request> found = requestRepository.findById(request.getId());
         assertTrue(found.isPresent());
         assertNotNull(found.get());
         assertEquals(found.get().getAccountCode(), request.getAccountCode());
@@ -80,12 +79,11 @@ public class RequestServiceImplTest {
         entityManager.persist(request);
         entityManager.flush();
 
+        // when
         requestRepository.deleteById(request.getId());
 
-        // when
-        Optional<Request> found = requestRepository.findById(request.getId());
-
         // then
+        Optional<Request> found = requestRepository.findById(request.getId());
         assertFalse(found.isPresent());
     }
 }
