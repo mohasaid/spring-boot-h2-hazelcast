@@ -47,12 +47,10 @@ public class RequestController {
         if (!request.isPresent()) {
             return ResponseEntity.noContent().build();
         } else {
-            String body = balancerService.balanceRequest(request.get());
-            System.out.println(body);
             return ResponseEntity
                     .ok()
                     .headers(responseHeaders)
-                    .body(body);
+                    .body(balancerService.balanceRequest(request.get()));
         }
     }
 
