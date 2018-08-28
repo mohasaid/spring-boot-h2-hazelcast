@@ -29,7 +29,7 @@ public class RequestController {
         this.requestService = requestService;
         this.balancerService = balancerService;
     }
-    
+
     @GetMapping(value = "/getData", produces = MediaType.APPLICATION_XML_VALUE)
     @ResponseBody
     public ResponseEntity getData(@RequestParam(value = "accountCode") String accountCode,
@@ -39,14 +39,8 @@ public class RequestController {
         RequestId requestId = new RequestId(accountCode, targetDevice, pluginVersion);
         Optional<Request> request = requestService.findById(requestId);
 
-        String message = "GetData GET request!\n"
-                + "accountCode = " + accountCode + "\n"
-                + "targetDevice = " + targetDevice + "\n"
-                + "pluginVersion = " + pluginVersion + "\n";
-
         final HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_XML_VALUE);
-        responseHeaders.set("MyResponseHeader", message);
 
         if (!request.isPresent()) {
             return ResponseEntity.noContent().build();
