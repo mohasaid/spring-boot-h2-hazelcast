@@ -16,12 +16,13 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class BalancerServiceImpl implements BalancerService {
 
     private final RequestResponseWriter requestResponseWriter;
-    private final Map<RequestId, Request> requestCache = new HashMap<>();
+    private final Map<RequestId, Request> requestCache = new ConcurrentHashMap<>();
 
     @Autowired
     public BalancerServiceImpl(RequestResponseWriter requestResponseWriter) {

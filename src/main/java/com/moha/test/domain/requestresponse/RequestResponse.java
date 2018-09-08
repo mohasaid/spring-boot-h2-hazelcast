@@ -13,7 +13,7 @@ public class RequestResponse implements Serializable {
     private static final long serialVersionUID = -2165348254717812579L;
 
     private String host;
-    private Integer pingTime;
+    private Integer pingTime = 5;
     private String code;
 
     public RequestResponse() {
