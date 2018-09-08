@@ -2,9 +2,7 @@ language: java
 jdk:
 - oraclejdk8
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  on:
-    branch: master
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  skip_cleanup: true
+  on: master
