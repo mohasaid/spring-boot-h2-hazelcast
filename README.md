@@ -71,7 +71,7 @@ $ java -jar test.jar
 
 It is built using *spring boot* with *H2* as an embedded database. In order to cache the database requests, it uses *hazelcast*. 
 Embedded database is initialized with predefined data that is inserted when the service starts and it can be found at resources folder. 
-Nevertheless you can modify it when the server is running up by the endpoints 
+Nevertheless you can modify the database data when the server is running up by the endpoints 
 or just querying the embedded database which is running on *http://localhost:8080/h2-console/* with the credentials set at applications.properties file.
 
 ### Documentation 
