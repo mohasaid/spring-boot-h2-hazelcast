@@ -39,6 +39,5 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public void deleteById(final RequestId requestId) {
         requestRepository.deleteById(requestId);
-
     }
 }

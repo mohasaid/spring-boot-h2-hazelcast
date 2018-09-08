@@ -5,6 +5,7 @@ import com.moha.techtestnpaw.domain.host.Host;
 import com.moha.techtestnpaw.domain.request.Request;
 import com.moha.techtestnpaw.domain.request.RequestBuilder;
 import com.moha.techtestnpaw.domain.request.RequestId;
+import com.moha.techtestnpaw.exceptions.BalancerException;
 import com.moha.techtestnpaw.services.BalancerService;
 import com.moha.techtestnpaw.services.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +36,7 @@ public class RequestController {
     @ResponseBody
     public ResponseEntity getData(@RequestParam(value = "accountCode") String accountCode,
                                   @RequestParam(value = "targetDevice") String targetDevice,
-                                  @RequestParam(value = "pluginVersion") String pluginVersion) throws JAXBException {
+                                  @RequestParam(value = "pluginVersion") String pluginVersion) throws BalancerException {
 
         Optional<Request> request = requestService.findById(new RequestId(accountCode, targetDevice, pluginVersion));
 
