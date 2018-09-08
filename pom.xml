@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.moha</groupId>
-	<artifactId>tech_test_NPAW</artifactId>
+	<artifactId>test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>tech_test_NPAW</name>
-	<description>Project for java tech test of NPAW</description>
+	<name>test</name>
+	<description>Project for testing Spring boot with embedded database H2 using Hazelcast for caching database requests</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -76,7 +76,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-        <finalName>tech_test_NPAW</finalName>
+        <finalName>test</finalName>
 	</build>
 
 </project>

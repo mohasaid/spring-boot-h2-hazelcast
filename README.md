@@ -1,6 +1,4 @@
-## Java TechTest NPAW
-
-This project is the tech test for **Nice People At Work (NPAW)**.
+Simple app for testing spring boot with embedded database (h2) caching database requests and balancing responses.
 
 ### Prerequisites
 * JDK 1.8+
@@ -16,7 +14,7 @@ $ mvn package
 ### Usage
 
 ```
-$ java -jar tech_test_NPAW.jar
+$ java -jar test.jar
 ```
 ### Techonologies 
 
