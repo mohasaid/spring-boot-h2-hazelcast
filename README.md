@@ -1,4 +1,6 @@
-Simple app for testing spring boot with h2 as embedded database caching database requests and balancing responses.
+# Spring-boot-H2-Hazelcast [![Build Status](https://travis-ci.org/mohasaid/spring-boot-h2-hazelcast.svg?branch=master)](https://travis-ci.org/mohasaid/spring-boot-h2-hazelcast)
+
+Simple app for testing spring boot with H2 as embedded database caching database requests and balancing responses.
 
 ### Prerequisites
 * JDK 1.8+
@@ -43,7 +45,7 @@ Adds an entity to the database
 - pluginVersion
 - pingTime
 - hosts (It is represented with JSONArray, example: [{"name":"host-test","load":10}])
-Example: http://localhost:8080/addData?accountCode=XXX&targetDevice=YYY&pluginVersion=XXX&pingTime=10&hosts= %5B{%22name%22:%22host-test%22,%22load%22:10}%5D]
+Example: http://localhost:8080/addData?accountCode=XXX&targetDevice=YYY&pluginVersion=XXX&pingTime=10&hosts=%5B{%22name%22:%22host-test%22,%22load%22:10}%5D
 ```
 
 ```
