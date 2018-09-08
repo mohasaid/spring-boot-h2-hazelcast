@@ -80,3 +80,8 @@ To know more about API endpoints you can visit the following URL in your browser
 
 http://localhost:8080/swagger-ui.html
 
+### Demo
+
+You can find here a [live demo](https://spring-boot-h2-hazelcast.herokuapp.com/) deployed.
+
+
