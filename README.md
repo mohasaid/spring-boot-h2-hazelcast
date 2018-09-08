@@ -1,4 +1,4 @@
-Simple app for testing spring boot with embedded database (h2) caching database requests and balancing responses.
+Simple app for testing spring boot with h2 as embedded database caching database requests and balancing responses.
 
 ### Prerequisites
 * JDK 1.8+
@@ -22,7 +22,7 @@ $ java -jar test.jar
 - [H2](http://www.h2database.com/html/main.html)
 - [Hazelcast](https://hazelcast.com/)
 
-It is built using *spring boot* as web container with a *H*2 as an embedded database. In order to cache the requests, it uses *hazelcast*. That project runs on port 8080 and has three endpoints with its parameters:
+It is built using *spring boot* with *H2* as an embedded database. In order to cache the requests, it uses *hazelcast*. That project runs on port 8080 and has three endpoints with its parameters:
 
 ```
 GET
