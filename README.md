@@ -35,7 +35,7 @@ The value of the tag **h** defines the host (or cluster) to which all the inform
 
 The configuration of the service could be something like the following:
 
-![](https://gyazo.com/5968045c796b485cc05903c3d021c6dd)
+![](https://i.gyazo.com/5968045c796b485cc05903c3d021c6dd.png)
 
 In this case, to balance the traffic in different clusters, when _clienteA_ uses the _XBox_ device with the plugin version _3.3.1_, the service
 will return a ping time of 10 seconds and it will balance the response between two clusters: clusterA.com (70% requests) and clusterB.com (30% requests).
