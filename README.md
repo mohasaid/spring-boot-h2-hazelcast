@@ -70,37 +70,13 @@ $ java -jar test.jar
 - [Hazelcast](https://hazelcast.com/)
 
 It is built using *spring boot* with *H2* as an embedded database. In order to cache the database requests, it uses *hazelcast*. 
-That service has three endpoints with its parameters:
-
-```
-GET
-Returns the view code, ping time and host where the plugin has to send the information
-/getData
-- accountCode
-- targetDevice
-- pluginVersion
-```
-
-```
-POST
-Adds an entity to the database
-/addData
-- accountCode
-- targetDevice
-- pluginVersion
-- pingTime
-- hosts (It is represented with JSONArray, example: [{"name":"host-test","load":10}])
-```
-
-```
-POST
-Deletes an entity from the database
-/deleteData
-- accountCode
-- targetDevice
-- pluginVersion
-```
-
-Database is initialized with predefined data that is inserted when the service starts and it can be found at resources folder. 
+Embedded database is initialized with predefined data that is inserted when the service starts and it can be found at resources folder. 
 Nevertheless you can modify it when the server is running up by the endpoints 
 or just querying the embedded database which is running on *http://localhost:8080/h2-console/* with the credentials set at applications.properties file.
+
+### Documentation 
+
+To know more about API endpoints you can visit the following URL in your browser which displays the documentation (the base path / redirects to it):
+
+http://localhost:8080/swagger-ui.html
+
