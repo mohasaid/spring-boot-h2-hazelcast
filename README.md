@@ -1,4 +1,4 @@
-# Spring-boot-H2-Hazelcast [![Build Status](https://travis-ci.org/mohasaid/spring-boot-h2-hazelcast.svg?branch=master)](https://travis-ci.org/mohasaid/spring-boot-h2-hazelcast)
+# Spring-boot-H2-Hazelcast [![Build Status](https://travis-ci.org/mohasaid/spring-boot-h2-hazelcast.svg?branch=master)](https://travis-ci.org/mohasaid/spring-boot-h2-hazelcast) [![codecov](https://codecov.io/gh/mohasaid/spring-boot-h2-hazelcast/branch/master/graph/badge.svg)](https://codecov.io/gh/mohasaid/spring-boot-h2-hazelcast)
 
 This app is a service which listens to HTTP requests by port 8080 of the different plugins that are distributed in different devices around the world, and responds
 a unique code that identifies the view that the app should show, the ping time that the device uses and the host to which you must send all the plugin information. 
