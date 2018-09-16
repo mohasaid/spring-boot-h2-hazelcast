@@ -5,7 +5,8 @@ jdk:
 script: "mvn cobertura:cobertura"
 deploy:
   provider: heroku
-  api_key: $HEROKU_API_KEY
+  api_key:
+    secure: "KIvfKlQr+75otR8kv8GK5+dLQg5IcVfAdNyAyLZ1j2MeKt7H+ToaYVnmiZGXOH1PmvHUwKnxlstIICuLiaqjhMDvb12QJJqc0Cjyw5DM2bnNHpWcjh+4hFORxmGo0XIWs7AsXTXL6CHpF32pdwPjEuiICZPYhOOTuHphe+bAKnfYz6cq1jyZikHO7v7pCIzbRYPiHbNA4m30Ew27pbz9E3uAl4CwIYOQ8orZTo505B0LEYvBlTojftSfQ7nV0ypfU9qh3zkDxb34FrDYQilU00oZ3PVfKn5WzoAGdyOlMPFZCuyi8GGc+o/V5ucQKfx2XxYpoQWNUbvg+wsY4YwfGvUx4uo7+KfR2EvME3A/kHD55aE7KB+e0xIc0aLvlHqMJ5EwSwfxXyruoQbOxRShoEzaOwcYrQjbvvfXdZGOfYa3ZT3JfP1dipxCfd+qkaK57cPz+PnuoW2sIbI318BPvruSSuYmYEMI8ZNdCelX/t9fwHSN90nN/XOYT2+TNEqM6eFUdOfCwyoGKdIX6NYsJv/8mwe/Y89cwpdt7Ux9jOG2gSwZnxiMDp6xGGRyFFB3imciKGi61+d2SBwLSKkh+UpJZckK8SFKCABTk6PoBJ/wC6MwcAsGpmA0WsuK2Hf4nI6tldHDxXi7Osz9KXYYXj8Y+c1PzszNHAEXkZXD+U4="
   skip_cleanup: true
   on: master
 after_success:
